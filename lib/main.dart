@@ -40,16 +40,17 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         _isLoading = true;
       });
-      print("AAAAA" + _email + " "  + _password );
+      
       try {
         final response = await http.post(
-          Uri.parse('http://10.0.2.2:8000/api/auth/login'),
+          // Uri.parse('http://10.0.2.2:8000/api/auth/login'),
+          Uri.parse('https://web-production-d75d.up.railway.app/api/auth/login'),
           body: {
             'email': _email,
             'password': _password,
           },
         );
-        print("BB" + response.body);
+
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
           final token = data['token'];
@@ -178,8 +179,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _getBooks() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/books'));
-
+    // final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/books'));
+    final response = await http.get(Uri.parse('https://web-production-d75d.up.railway.app/api/books'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
